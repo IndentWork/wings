@@ -2,61 +2,45 @@ name: Build
 
 on:
   workflow_run:
-    workflows: ["Bootstrap"]
+    workflows: ["Validate"]
     types: [completed]
-    branches: [main]
-  pull_request:
     branches: [main]
 
 jobs:
-  lint:
-    name: Lint
+  version:
+    name: Version
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'pull_request' ||
-      github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+      - name: Bump version and update changelog
+        run: echo "Version bump step — to be implemented"
 
-      - name: Install dev dependencies
-        run: uv sync --group dev
-
-      - name: black
-        run: uv run black --check .
-
-      - name: isort
-        run: uv run isort --check-only .
-
-      - name: flake8
-        run: uv run flake8 .
-
-  test:
-    name: Test
+  package:
+    name: Package
     runs-on: ubuntu-latest
-    needs: [lint]
+    needs: [version]
 
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Azure Login
+        uses: azure/login@v3
         with:
-          python-version: "3.13"
+          creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}"}'
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+      - name: Build Docker image
+        run: echo "Docker build step — to be implemented"
 
-      - name: Install dependencies
-        run: uv sync --group dev
-
-      - name: Run tests
-        run: uv run pytest
+      - name: Push to ACR
+        run: echo "ACR push step — to be implemented"
