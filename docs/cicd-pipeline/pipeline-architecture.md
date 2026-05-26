@@ -26,7 +26,7 @@ destroy.yml  (manual trigger only)
 ## Stages
 
 ### 1. Bootstrap (`bootstrap.yml`)
-**Status: Done** (currently named `bootstrap-preparation.yml`, to be renamed)
+**Status: Done**
 
 Provisions shared Azure infrastructure. Idempotent — safe to run on every push.
 
@@ -39,7 +39,7 @@ Triggers on: `push` to `main`, `workflow_dispatch`
 ---
 
 ### 2. Build (`build.yml`)
-**Status: Partially done** (lint + test exist in `ci.yml`, to be renamed and extended)
+**Status: In progress** (lint → test done; Docker build, versioning, ACR push pending)
 
 Runs after Bootstrap succeeds. Validates code, packages the app, and pushes the image to ACR.
 
@@ -110,8 +110,8 @@ jobs:
 
 | File | Name | Stage | Status |
 |------|------|-------|--------|
-| `bootstrap.yml` | Bootstrap | 1 | Done (rename pending) |
-| `build.yml` | Build | 2 | In progress (rename + extend `ci.yml`) |
+| `bootstrap.yml` | Bootstrap | 1 | Done |
+| `build.yml` | Build | 2 | In progress (Docker build, versioning, ACR push pending) |
 | `deploy.yml` | Deploy (Dev → QA → Prod) | 3 | Not started |
 | `destroy.yml` | Destroy (Prod → QA → Dev) | 4 | Not started |
 
@@ -119,8 +119,8 @@ jobs:
 
 ## Next Steps
 
-1. Rename `bootstrap-preparation.yml` → `bootstrap.yml`
-2. Rename `ci.yml` → `build.yml`, trigger via `workflow_run` after Bootstrap
+1. ~~Rename `bootstrap-preparation.yml` → `bootstrap.yml`~~ Done
+2. ~~Rename `ci.yml` → `build.yml`, trigger via `workflow_run` after Bootstrap~~ Done
 3. Add Docker build, version tagging, and ACR push jobs to `build.yml`
 4. Create `deploy.yml` with Dev → QA → Prod jobs in sequence (decide on deployment tool first)
 5. Add approval gates for QA and Prod environments
