@@ -10,9 +10,15 @@ The pipeline is split into three stages — **Bootstrap**, **Build**, and **Depl
 
 ```
 bootstrap.yml → build.yml → deploy.yml
-                             └── Deploy Dev (plan → apply)
-                             └── Deploy QA  (plan → apply)
-                             └── Deploy Prod (plan → apply)
+                              └── Deploy Dev  (plan → apply)
+                              └── Deploy QA   (plan → apply)
+                              └── Deploy Prod (plan → apply)
+
+destroy.yml  (manual trigger only)
+  └── Destroy Dev
+  └── Destroy QA
+  └── Destroy Prod
+  (bootstrap resources are NOT destroyed)
 ```
 
 ---
@@ -66,6 +72,22 @@ Triggers on: `workflow_run` → Build completed successfully
 
 ---
 
+### 4. Destroy (`destroy.yml`)
+**Status: Not started**
+
+Tears down all app environment resources (Dev, QA, Prod). Bootstrap resources (Resource Group, ACR) are intentionally left intact so the pipeline can be re-deployed without reprovisioning shared infra.
+
+Jobs (in order):
+1. **Destroy Prod** — destroy prod environment
+2. **Destroy QA** — `needs: destroy-prod`
+3. **Destroy Dev** — `needs: destroy-qa`
+
+Triggers on: `workflow_dispatch` only — never runs automatically
+
+> Destroy order is prod → qa → dev (reverse of deploy) to avoid dependency issues.
+
+---
+
 ## Sequencing Mechanism
 
 Workflows are chained using GitHub Actions `workflow_run`:
@@ -91,6 +113,7 @@ jobs:
 | `bootstrap.yml` | Bootstrap | 1 | Done (rename pending) |
 | `build.yml` | Build | 2 | In progress (rename + extend `ci.yml`) |
 | `deploy.yml` | Deploy (Dev → QA → Prod) | 3 | Not started |
+| `destroy.yml` | Destroy (Prod → QA → Dev) | 4 | Not started |
 
 ---
 
@@ -101,3 +124,4 @@ jobs:
 3. Add Docker build, version tagging, and ACR push jobs to `build.yml`
 4. Create `deploy.yml` with Dev → QA → Prod jobs in sequence (decide on deployment tool first)
 5. Add approval gates for QA and Prod environments
+6. Create `destroy.yml` (manual trigger, destroys Dev → QA → Prod, leaves bootstrap intact)
