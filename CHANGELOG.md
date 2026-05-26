@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.2.2 (2026-05-26)
+
+### Bug Fixes
+
+- Explicitly set prerelease = false for main branch in PSR
+  ([`7f9dcc0`](https://github.com/ASHISH-ARORA-24/wings/commit/7f9dcc0164e97c5d5aba6066425957f80f646197))
+
+Ensures all releases from main are stable releases, never beta or pre-release, using PSR v9 branch
+  group configuration.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.2.1 (2026-05-26)
 
 ### Bug Fixes
