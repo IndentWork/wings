@@ -1,0 +1,10 @@
+.git
+.github
+.venv
+.env
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+db.sqlite3
+docs
