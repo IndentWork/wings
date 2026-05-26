@@ -1,0 +1,48 @@
+name: Bootstrap Preparation
+
+on:
+  push:
+    branches: [main]
+
+env:
+  RESOURCE_GROUP: rg-wings-bootstrap
+  ACR_NAME: acrwingsacr01
+  LOCATION: southindia
+
+jobs:
+  bootstrap:
+    name: Bootstrap Infrastructure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Ensure Resource Group exists
+        run: |
+          if az group show --name $RESOURCE_GROUP &>/dev/null; then
+            echo "Resource group $RESOURCE_GROUP already exists, skipping."
+          else
+            echo "Creating resource group $RESOURCE_GROUP in $LOCATION..."
+            az group create --name $RESOURCE_GROUP --location $LOCATION
+            echo "Resource group $RESOURCE_GROUP created."
+          fi
+
+      - name: Ensure ACR exists
+        run: |
+          if az acr show --name $ACR_NAME --resource-group $RESOURCE_GROUP &>/dev/null; then
+            echo "ACR $ACR_NAME already exists, skipping."
+          else
+            echo "Creating ACR $ACR_NAME..."
+            az acr create \
+              --name $ACR_NAME \
+              --resource-group $RESOURCE_GROUP \
+              --sku Basic \
+              --location $LOCATION
+            echo "ACR $ACR_NAME created."
+          fi
