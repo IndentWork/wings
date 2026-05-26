@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.2.1 (2026-05-26)
+
+### Bug Fixes
+
+- Resolve collectstatic failure in Docker build
+  ([`d901ea5`](https://github.com/ASHISH-ARORA-24/wings/commit/d901ea5b5258f11009370bf4f85c0dcee764bbc4))
+
+- Add STATIC_ROOT to settings.py (required by collectstatic) - Use .venv/bin/python directly instead
+  of uv run to avoid re-downloading dev dependencies during image build
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.2.0 (2026-05-26)
 
 ### Features
