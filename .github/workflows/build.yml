@@ -40,6 +40,10 @@ jobs:
     needs: [version]
     if: needs.version.outputs.released == 'true'
 
+    env:
+      ACR_NAME: acrwingsacr01
+      IMAGE_NAME: wings
+
     steps:
       - uses: actions/checkout@v6
         with:
@@ -50,8 +54,21 @@ jobs:
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}"}'
 
+      - name: Log in to ACR
+        run: az acr login --name $ACR_NAME
+
       - name: Build Docker image
-        run: echo "Docker build step — to be implemented"
+        run: |
+          docker build \
+            -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ needs.version.outputs.version }} \
+            -t $ACR_NAME.azurecr.io/$IMAGE_NAME:latest \
+            --label org.opencontainers.image.version=${{ needs.version.outputs.version }} \
+            --label org.opencontainers.image.revision=${{ github.sha }} \
+            --label org.opencontainers.image.source=https://github.com/${{ github.repository }} \
+            --label org.opencontainers.image.created=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+            .
 
       - name: Push to ACR
-        run: echo "ACR push step — to be implemented"
+        run: |
+          docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ needs.version.outputs.version }}
+          docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:latest
