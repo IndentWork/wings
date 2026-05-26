@@ -1,6 +1,28 @@
 # CHANGELOG
 
 
+## v0.2.0 (2026-05-26)
+
+### Features
+
+- Add Dockerfile and wire ACR push in build pipeline
+  ([`3a5dbe1`](https://github.com/ASHISH-ARORA-24/wings/commit/3a5dbe1f48cdeda837baaaf65a92ff3f39d348e7))
+
+- Adds Dockerfile using python:3.13-slim, uv, gunicorn on port 8000 - Adds .dockerignore to exclude
+  git, venv, env, and test artifacts - Adds gunicorn to project dependencies - Updates build.yml
+  package job with real docker build and ACR push - Image tagged with semver version and latest
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+- Add OCI labels to Docker image build
+  ([`8205fee`](https://github.com/ASHISH-ARORA-24/wings/commit/8205fee08f3f808c44831bac1e783878864f43ed))
+
+Embeds version, commit SHA, source repo, and build timestamp as standard OCI image labels so
+  deployment can identify exact image origin.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.1.0 (2026-05-26)
 
 ### Bug Fixes
