@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.3.2 (2026-05-27)
+
+### Bug Fixes
+
+- Add concurrency group to build workflow — queue runs, never cancel
+  ([#1](https://github.com/IndentWork/wings/pull/1),
+  [`ca15fbb`](https://github.com/IndentWork/wings/commit/ca15fbb6a872b9acb7592564edc1435e82d4c57f))
+
+Co-authored-by: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.3.1 (2026-05-27)
 
 ### Bug Fixes
