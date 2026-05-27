@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v0.3.1 (2026-05-27)
+
+### Bug Fixes
+
+- Update home page welcome text
+  ([`a6d1d41`](https://github.com/IndentWork/wings/commit/a6d1d410c7887cc7137a90ce0b6b870019286582))
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.3.0 (2026-05-27)
 
 ### Features
