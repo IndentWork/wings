@@ -35,7 +35,7 @@ Provisions shared Azure infrastructure. Idempotent — safe to run on every push
 
 - Azure Login (Service Principal via `creds` JSON)
 - Ensure Resource Group exists (`rg-wings-bootstrap`)
-- Ensure ACR exists (`acrwingsacr01`)
+- Ensure ACR exists (`acrwings01`)
 
 Triggers on: `push` to `main`, `workflow_dispatch`
 
@@ -64,7 +64,7 @@ Jobs (in sequence):
    - `feat/` → minor bump (0.1.0 → 0.2.0)
    - `fix/` or `hotfix/` → patch bump (0.1.0 → 0.1.1)
 2. **Package** — Docker image build, tagged with new version
-3. **Push to ACR** — push versioned image to `acrwingsacr01`
+3. **Push to ACR** — push versioned image to `acrwings01`
 
 Triggers on: `workflow_run` → Validate completed successfully on `main`
 
