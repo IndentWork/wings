@@ -6,6 +6,10 @@ on:
     types: [completed]
     branches: [main]
 
+concurrency:
+  group: build-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
   id-token: write
