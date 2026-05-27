@@ -1,6 +1,39 @@
 # CHANGELOG
 
 
+## v0.2.3 (2026-05-27)
+
+### Bug Fixes
+
+- Rename ACR from acrwingsacr01 to acrwings01
+  ([`6e63019`](https://github.com/ASHISH-ARORA-24/wings/commit/6e63019701bdb31f7e702a13f41956df1659aa2f))
+
+Removes the duplicate "acr" in the registry name. The new convention is acrwings<number> (e.g.
+  acrwings01, acrwings02) — single resource-type prefix only.
+
+Updates bootstrap.yml and build.yml. Refreshes the bootstrap documentation to match: new ACR name,
+  current workflow filename (bootstrap.yml, not bootstrap-preparation.yml), and the actual
+  3-workflow chain (Bootstrap → Validate → Build).
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+### Documentation
+
+- Remove deploy and destroy stages from pipeline architecture
+  ([`976f215`](https://github.com/ASHISH-ARORA-24/wings/commit/976f215b269f6066a4f1b39d83cf80c9f186aabe))
+
+Deploy and destroy are not part of the wings/ pipeline — they live in wings_deployment/. The doc was
+  still describing them as wings/ stages, which is no longer accurate.
+
+Removes: - Stage 4 (Deploy) and Stage 5 (Destroy) sections - deploy.yml and destroy.yml rows from
+  the Workflow Files table - Next Steps items 6-8 (deploy and destroy creation) - Deploy/destroy
+  boxes from the overview diagram
+
+Adds a pointer to docs/deployment.md at the project root, where the deployment plan now lives.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+
 ## v0.2.2 (2026-05-26)
 
 ### Bug Fixes
