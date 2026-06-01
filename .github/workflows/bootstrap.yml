@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  RESOURCE_GROUP: rg-wings-bootstrap
-  ACR_NAME: acrwings01
+  RESOURCE_GROUP: rg-iw-wings-bootstrap
+  ACR_NAME: acriwwings01
   LOCATION: southindia
 
 jobs:

@@ -42,13 +42,13 @@ Authenticates to Azure using the service principal `wings-github-actions-sp` via
 
 ### Step 2 — Ensure Resource Group exists
 
-Checks if `rg-wings-bootstrap` exists in `southindia`.
+Checks if `rg-iw-wings-bootstrap` exists in `southindia`.
 - **Exists** → skips
 - **Not exists** → creates it
 
 ### Step 3 — Ensure ACR exists
 
-Checks if `acrwings01` exists inside `rg-wings-bootstrap`.
+Checks if `acriwwings01` exists inside `rg-iw-wings-bootstrap`.
 - **Exists** → skips
 - **Not exists** → creates it with `Basic` SKU
 
@@ -56,11 +56,11 @@ Checks if `acrwings01` exists inside `rg-wings-bootstrap`.
 
 | Variable | Value |
 |---|---|
-| `RESOURCE_GROUP` | `rg-wings-bootstrap` |
-| `ACR_NAME` | `acrwings01` |
+| `RESOURCE_GROUP` | `rg-iw-wings-bootstrap` |
+| `ACR_NAME` | `acriwwings01` |
 | `LOCATION` | `southindia` |
 
-ACR naming follows the convention `acrwings<number>` — increment the number if additional registries are needed (e.g., `acrwings02`).
+ACR naming follows the convention `acr<org><project><number>` (alphanumeric only — Azure restriction) — increment the number if additional registries are needed (e.g., `acriwwings02`).
 
 ## Position in the pipeline
 
