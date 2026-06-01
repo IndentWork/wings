@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.5.0 (2026-06-01)
+
+### Features
+
+- Add settings_azure overlay for Azure deployment targets
+  ([#3](https://github.com/IndentWork/wings/pull/3),
+  [`66bc677`](https://github.com/IndentWork/wings/commit/66bc6772ec3dac3f65acd7f4bbb634686e1d3553))
+
+
 ## v0.4.0 (2026-06-01)
 
 ### Features
