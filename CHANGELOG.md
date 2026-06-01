@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.4.0 (2026-06-01)
+
+### Features
+
+- Add iw organization prefix to bootstrap resources and show env+version on home page
+  ([#2](https://github.com/IndentWork/wings/pull/2),
+  [`80eef6e`](https://github.com/IndentWork/wings/commit/80eef6e67cf95efe18193d62c9dc57190713028a))
+
+
 ## v0.3.2 (2026-05-27)
 
 ### Bug Fixes
