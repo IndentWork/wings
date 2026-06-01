@@ -116,3 +116,14 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+# Settings overlay — see docs/settings-strategy.md
+# WINGS_SETTINGS env var picks which overlay to apply on top of this base config.
+import os  # noqa: E402
+
+_overlay = os.environ.get("WINGS_SETTINGS")
+if _overlay == "azure":
+    from .settings_azure import *  # noqa: F401, F403
+elif _overlay == "local":
+    from .settings_local import *  # noqa: F401, F403
