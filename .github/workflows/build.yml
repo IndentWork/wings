@@ -45,7 +45,7 @@ jobs:
     if: needs.version.outputs.released == 'true'
 
     env:
-      ACR_NAME: acrwings01
+      ACR_NAME: acriwwings01
       IMAGE_NAME: wings
 
     steps:
