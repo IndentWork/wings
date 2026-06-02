@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.6.0 (2026-06-02)
+
+### Features
+
+- Update home page welcome text ([#4](https://github.com/IndentWork/wings/pull/4),
+  [`e2dbea7`](https://github.com/IndentWork/wings/commit/e2dbea7027929d0bf92ddaa34a01480be9b058cf))
+
+
 ## v0.5.0 (2026-06-01)
 
 ### Features
