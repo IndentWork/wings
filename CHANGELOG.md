@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.7.0 (2026-06-02)
+
+### Features
+
+- Add settings_local overlay and fix gunicorn timeout
+  ([#5](https://github.com/IndentWork/wings/pull/5),
+  [`41626c5`](https://github.com/IndentWork/wings/commit/41626c501a7ab4bbdd869284bf818e2ab130fce9))
+
+* feat: add settings_local overlay for local development
+
+* fix: increase gunicorn timeout to 120s to prevent cold-start worker kills
+
+
 ## v0.6.0 (2026-06-02)
 
 ### Features
