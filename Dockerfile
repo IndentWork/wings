@@ -16,4 +16,4 @@ RUN .venv/bin/python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD [".venv/bin/gunicorn", "wings.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD [".venv/bin/gunicorn", "wings.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "120"]
