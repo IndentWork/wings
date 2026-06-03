@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v0.8.0 (2026-06-03)
+
+### Features
+
+- Add /healthz and /healthz/ready endpoints ([#6](https://github.com/IndentWork/wings/pull/6),
+  [`e0a6e34`](https://github.com/IndentWork/wings/commit/e0a6e34acc7626eda930819b23cf1a0e44c6346d))
+
+Add two health endpoints so deploy pipelines can check that a slot is actually serving traffic
+  before swapping, instead of relying on the home page returning 200.
+
+- /healthz returns 200 unconditionally — liveness check (is the process responding?). -
+  /healthz/ready runs SELECT 1 against Postgres and returns 200 if the DB is reachable, 503
+  otherwise — readiness check (can this slot actually serve real traffic?).
+
+
 ## v0.7.0 (2026-06-02)
 
 ### Features
