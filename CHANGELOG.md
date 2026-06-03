@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v0.9.0 (2026-06-03)
+
+### Features
+
+- Run migrations on container startup ([#7](https://github.com/IndentWork/wings/pull/7),
+  [`438e3ae`](https://github.com/IndentWork/wings/commit/438e3ae066556c262187b497184edba7187a172c))
+
+Add entrypoint.sh that runs migrate --noinput before gunicorn starts. Without this, fresh Azure
+  Postgres has no Django tables and every request that touches the DB fails with 'relation does not
+  exist'.
+
+Uses exec so gunicorn replaces the shell process and receives signals directly. set -e ensures a
+  failed migration stops the container immediately rather than starting a broken app.
+
+
 ## v0.8.0 (2026-06-03)
 
 ### Features
