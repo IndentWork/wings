@@ -18,9 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from wings.views import home
+from wings.views import healthz, healthz_ready, home
 
 urlpatterns = [
     path("", home, name="home"),
+    path("healthz", healthz, name="healthz"),
+    path("healthz/ready", healthz_ready, name="healthz_ready"),
     path("admin/", admin.site.urls),
 ]
