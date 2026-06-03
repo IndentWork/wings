@@ -9,8 +9,6 @@ The platform (Terraform on App Service) is responsible for setting these env var
 
 import os
 
-import dj_database_url
-
 DEBUG = False
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -18,9 +16,14 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
 
 DATABASES = {
-    "default": dj_database_url.config(
-        env="DATABASE_URL",
-        conn_max_age=600,
-        ssl_require=True,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ["DB_HOST"],
+        "NAME": os.environ.get("DB_NAME", "wings"),
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD"],
+        "PORT": "5432",
+        "CONN_MAX_AGE": 600,
+        "OPTIONS": {"sslmode": "require"},
+    }
 }
