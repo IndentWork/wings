@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v0.10.0 (2026-06-03)
+
+### Features
+
+- Replace dj_database_url with explicit DB credentials
+  ([#8](https://github.com/IndentWork/wings/pull/8),
+  [`88d7f7f`](https://github.com/IndentWork/wings/commit/88d7f7f888b88a7fd9a8c7eb38ba005fb1e93ee5))
+
+Replace the DATABASE_URL env var with four separate env vars: DB_HOST, DB_USER, DB_PASSWORD,
+  DB_NAME. Build the Django DATABASES dict directly instead of parsing a URL.
+
+This avoids dj_database_url.ParseError when the Postgres password contains special characters (!, @,
+  # etc.) that are valid in passwords but break URL parsing when unencoded.
+
+Also removes the dj_database_url import — no longer needed.
+
+
 ## v0.9.0 (2026-06-03)
 
 ### Features
