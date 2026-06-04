@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v0.11.0 (2026-06-04)
+
+### Features
+
+- Rename DB env vars to POSTGRES_* matching Microsoft reference
+  ([#9](https://github.com/IndentWork/wings/pull/9),
+  [`b2a851a`](https://github.com/IndentWork/wings/commit/b2a851a105fb864b4035d00107066d00edffa935))
+
+Align env-var names with the canonical Microsoft Azure Django reference template
+  (Azure-Samples/azure-django-postgres-flexible-appservice):
+
+- DB_HOST -> POSTGRES_HOST - DB_USER -> POSTGRES_USERNAME - DB_NAME -> POSTGRES_DATABASE -
+  DB_PASSWORD -> POSTGRES_PASSWORD
+
+Also make POSTGRES_PORT (default 5432) and POSTGRES_SSL (default require) configurable via env vars
+  instead of hardcoded.
+
+Matching the reference naming makes the stack recognisable to anyone who has shipped Django on App
+  Service before and aligns with Azure Service Connector's convention.
+
+settings_local.py in wings_local_dev/ is untouched — it uses DATABASE_URL via dj_database_url,
+  loaded when WINGS_SETTINGS=local.
+
+
 ## v0.10.0 (2026-06-03)
 
 ### Features
